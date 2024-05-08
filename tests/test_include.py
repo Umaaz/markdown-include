@@ -29,10 +29,10 @@ def test_include_remote(markdown_include):
 
 
 def test_include_remote_not_found(markdown_include):
-    source = "{!https://example.com/cmacmackin/markdown-include/master/tests/resources/not_found.md!}"
+    source = "{!https://github.com/not_found.md!}"
     html = markdown.markdown(source, extensions=[markdown_include])
 
-    assert html == "<p>Error loading remote template (https://example.com/cmacmackin/markdown-include/master/tests/resources/not_found.md): HTTP Error 404: Not Found</p>"
+    assert html == "<p>Error loading remote template (https://github.com/not_found.md): HTTP Error 404: Not Found</p>"
 
 
 def test_relative_path(markdown_include):

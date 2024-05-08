@@ -223,6 +223,7 @@ class IncludePreprocessor(Preprocessor):
                 data = urlopen.read()
                 file.write(data)
             except urllib.error.HTTPError as e:
+                e.read().decode()
                 file.write(
                     bytes(f"Error loading remote template ({filename}): {e}", "utf-8")
                 )
