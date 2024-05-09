@@ -174,7 +174,7 @@ class IncludePreprocessor(Preprocessor):
                         link = LINK_SYNTAX.search(text[i])
                         if link:
                             raw_path = link.group(2)
-                            if not raw_path.startswith("http"):
+                            if not raw_path.startswith("http") and not raw_path.startswith("/"):
                                 path_ = f"{os.path.dirname(relative_filename)}{os.path.sep}{raw_path}"
                                 text[i] = (
                                     text[i][: link.start(2)]

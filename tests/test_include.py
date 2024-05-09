@@ -41,6 +41,13 @@ def test_relative_path_url_link(markdown_include):
 
     assert html == "<p><a href=\"https://google.com\">some link</a></p>"
 
+
+def test_abs_url_link(markdown_include):
+    source = "{!docs/template/template_abs_link.md!}"
+    html = markdown.markdown(source, extensions=[markdown_include])
+
+    assert html == "<p><a href=\"/template\">some link</a></p>"
+
 def test_relative_path_img_url_link(markdown_include):
     source = "{!with_img_link.md!}"
     html = markdown.markdown(source, extensions=[markdown_include])
