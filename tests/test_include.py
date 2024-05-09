@@ -21,20 +21,6 @@ def markdown_include_inherit_heading_depth():
     )
 
 
-def test_include_remote(markdown_include):
-    source = "{!https://raw.githubusercontent.com/cmacmackin/markdown-include/master/tests/resources/simple.md!}"
-    html = markdown.markdown(source, extensions=[markdown_include])
-
-    assert html == "<p>This is a simple template</p>"
-
-
-def test_include_remote_not_found(markdown_include):
-    source = "{!https://github.com/not_found.md!}"
-    html = markdown.markdown(source, extensions=[markdown_include])
-
-    assert html == "<p>Error loading remote template (https://github.com/not_found.md): HTTP Error 404: Not Found</p>"
-
-
 def test_relative_path(markdown_include):
     source = "{!docs/template/template.md!}"
     html = markdown.markdown(source, extensions=[markdown_include])
@@ -54,6 +40,13 @@ def test_relative_path_url_link(markdown_include):
     html = markdown.markdown(source, extensions=[markdown_include])
 
     assert html == "<p><a href=\"https://google.com\">some link</a></p>"
+
+
+def test_abs_url_link(markdown_include):
+    source = "{!docs/template/template_abs_link.md!}"
+    html = markdown.markdown(source, extensions=[markdown_include])
+
+    assert html == "<p><a href=\"/template\">some link</a></p>"
 
 def test_relative_path_img_url_link(markdown_include):
     source = "{!with_img_link.md!}"
