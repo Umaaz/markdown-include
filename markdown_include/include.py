@@ -148,7 +148,7 @@ class IncludePreprocessor(Preprocessor):
                                     )
 
                                 wanted_lines.extend(
-                                    original_text[current_start - 1 : current_end]
+                                    original_text[current_start - 1: current_end]
                                 )
                             else:
                                 wanted_line = int(block.strip())
@@ -174,19 +174,18 @@ class IncludePreprocessor(Preprocessor):
                         link = LINK_SYNTAX.search(text[i])
                         if link:
                             raw_path = link.group(2)
-                            if not raw_path.startswith(
-                                "http"
-                            ) and not raw_path.startswith("/"):
+                            if not raw_path.startswith("http") and not raw_path.startswith(
+                                    "/") and not raw_path.startswith("#"):
                                 path_ = f"{os.path.dirname(relative_filename)}{os.path.sep}{raw_path}"
                                 text[i] = (
-                                    text[i][: link.start(2)]
-                                    + path_
-                                    + text[i][link.end(2) :]
+                                        text[i][: link.start(2)]
+                                        + path_
+                                        + text[i][link.end(2):]
                                 )
 
                         text[i] = text[i].rstrip("\r\n")
                     text_to_insert = "\r\n".join(text)
-                    line = line[: m.start()] + text_to_insert.strip() + line[m.end() :]
+                    line = line[: m.start()] + text_to_insert.strip() + line[m.end():]
                     del lines[loc]
                     lines[loc:loc] = line.splitlines()
                     m = INC_SYNTAX.search(line)
