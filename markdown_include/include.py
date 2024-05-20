@@ -196,7 +196,9 @@ class IncludePreprocessor(Preprocessor):
 
                             text[i] = text[i].rstrip("\r\n")
                         text_to_insert = "\r\n".join(text)
-                        line = line[: m.start()] + text_to_insert.strip() + line[m.end() :]
+                        line = (
+                            line[: m.start()] + text_to_insert.strip() + line[m.end() :]
+                        )
                         del lines[loc]
                         lines[loc:loc] = line.splitlines()
                         m = INC_SYNTAX.search(line)
